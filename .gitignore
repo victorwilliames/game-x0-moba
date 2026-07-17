@@ -1,0 +1,20 @@
+# Dependências e caches - nunca versionar
+node_modules/
+dist/
+.cache/
+*.log
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Arquivos temporários do Antigravity/IDE
+.gemini/
+*.tmp
+
+# Assets pesados (binários de modelo 3D - versionar separadamente se necessário)
+# Descomente as linhas abaixo se os GLB/FBX forem muito grandes pro GitHub:
+# assets/**/*.glb
+# assets/**/*.fbx
+# Personagens*/**/*.glb
