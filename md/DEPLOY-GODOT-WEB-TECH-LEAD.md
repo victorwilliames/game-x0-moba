@@ -13,10 +13,18 @@
      👉 **URL Ativa:** [https://victorwilliames.github.io/game-x0-moba/](https://victorwilliames.github.io/game-x0-moba/)
    * O pipeline compila TypeScript e minifica os bundles, copiando os modelos 3D (`.glb`) para um servidor estático que o navegador do cliente renderiza em WebGL.
 
-2. **Fase Atual:**
+2. **Diretriz de Navegador (Decisão Fechada):**
+   * 🔥 **FOCO 100% EM GOOGLE CHROME MODERNO (Chromium):** Não gastar tempo nem energia com compatibilidade de navegadores antigos ou Safari/iOS WebKit.
+   * **Vantagens Técnicas no Chrome:**
+     * Suporte nativo pleno a **WebAssembly SIMD** (instruções vetoriais aceleradas por CPU no V8 para a física/matemática do Godot).
+     * **WebGL 2.0** sem limitações de extensões de textura e buffers.
+     * Suporte perfeito e estável à **Pointer Lock API** e **Fullscreen API** (essenciais para controles estilo LoL).
+     * Zero necessidade de polyfills legados ou fallbacks pesados.
+
+3. **Fase Atual:**
    * O projeto está sendo **recriado em Godot 4** via linha de comando (`godot --headless` / CLI).
    * **Decisão de fluxo:** O desenvolvimento atual será mantido **estritamente local** durante as etapas de implementação e iteração.
-   * **Meta de Lançamento/Playtest:** Ao final dos marcos de entrega, a versão Web exportada do Godot será publicada no GitHub Pages para testes públicos diretos no navegador (PC e Mobile).
+   * **Meta de Lançamento/Playtest:** Ao final dos marcos de entrega, a versão Web exportada do Godot será publicada no GitHub Pages para testes públicos diretos no navegador (PC e Mobile Chrome).
 
 ---
 
