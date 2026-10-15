@@ -1,0 +1,341 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Outfit', sans-serif;
+  user-select: none;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #03070c;
+  color: #f0f6fc;
+  cursor: url('./UI/pointers/normal.cur'), auto;
+}
+
+#game-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: block;
+  cursor: url('./UI/pointers/normal.cur'), auto;
+}
+
+#status-hud {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+  background: rgba(6, 12, 19, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(194, 157, 83, 0.4);
+  border-radius: 8px;
+  padding: 14px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  pointer-events: none;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.hud-item {
+  color: #a0aab5;
+}
+
+.hud-item span {
+  color: #ffd88a;
+  font-weight: 700;
+  font-family: monospace;
+}
+
+/* Botão de Fullscreen Hextech */
+#fullscreen-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  background: rgba(10, 20, 30, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(194, 157, 83, 0.6);
+  color: #ffd88a;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#fullscreen-btn:hover {
+  background: rgba(194, 157, 83, 0.2);
+  border-color: #ffd88a;
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(194, 157, 83, 0.4);
+}
+
+#fullscreen-btn:active {
+  transform: scale(0.95);
+}
+
+/* Container de Barras de Vida Flutuantes */
+#health-bars-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.floating-health-bar {
+  position: absolute;
+  width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  transition: opacity 0.15s ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+}
+/* Container de Barras de Vida Flutuantes */
+#health-bars-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.floating-health-bar {
+  position: absolute;
+  width: 105px; /* Reduzido para ficar perfeitamente proporcional à câmera afastada */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  transition: opacity 0.15s ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8));
+}
+
+/* Placa do Player estilo LoL (Nível, HP, Mana, Ticks, Textos alinhados) */
+.lol-player-plate {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.95);
+  border: 1.5px solid #000000;
+  border-radius: 1px;
+  padding: 1px;
+  box-shadow: inset 0 1px 2px rgba(255,255,255,0.1);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.lol-level-box {
+  width: 15px; /* Compacto */
+  height: 15px;
+  background: #122436; /* Azul escuro LoL */
+  border: 1px solid #c29d53; /* Borda dourada */
+  color: #00ffcc; /* Nível verde brilhante */
+  font-size: 9px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1.5px;
+  border-radius: 1px;
+  flex-shrink: 0;
+  font-family: 'Outfit', sans-serif;
+}
+
+.lol-bars-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 1px;
+}
+
+/* Barras de HP e Mana internas da Placa */
+.lol-bars-container .bar-outer.hp {
+  width: 100%;
+  height: 7px; /* Mais fina e elegante */
+  background: rgba(10, 15, 20, 0.95);
+  border: none;
+  border-radius: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.lol-bars-container .bar-inner.hp {
+  height: 100%;
+  background: linear-gradient(180deg, #2ecc71, #27ae60);
+  width: 100%;
+  transition: width 0.1s ease-out;
+}
+
+.lol-bars-container .bar-outer.mana {
+  width: 100%;
+  height: 3px; /* Mais fina */
+  background: rgba(5, 8, 12, 0.95);
+  border: none;
+  border-radius: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.lol-bars-container .bar-inner.mana {
+  height: 100%;
+  background: linear-gradient(180deg, #00bfff, #0077c2);
+  width: 100%;
+  transition: width 0.1s ease-out;
+}
+
+/* Informações de cabeçalho do player flutuando acima da placa */
+.player-header-info {
+  display: flex;
+  flex-direction: column; /* Alinha em coluna para criar o visual de 3 linhas */
+  align-items: center;
+  width: 100%;
+  margin-bottom: 2px;
+  gap: 1px;
+  box-sizing: border-box;
+}
+
+.player-header-info .entity-name {
+  font-size: 9px;
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 1px 1px 1px #000, -1px -1px 1px #000, 1px -1px 1px #000, -1px 1px 1px #000;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.player-header-info .hp-text-overlay {
+  font-size: 8.5px; /* Tamanho ajustado para caber em uma única linha */
+  font-weight: 800;
+  color: #00ffcc;
+  text-shadow: 1px 1px 1px #000, -1px -1px 1px #000, 1px -1px 1px #000, -1px 1px 1px #000;
+  letter-spacing: 0.5px;
+  white-space: nowrap; /* Impede a quebra de linha de HP/HP/% */
+}
+
+/* Moldura dourada para inimigos (estilo boss/monstro do print) */
+.floating-health-bar.enemy .bar-outer {
+  width: 100%;
+  height: 9px; /* Mais fina e compacta */
+  background: rgba(10, 15, 20, 0.95);
+  border: 1.5px solid #c29d53;
+  border-radius: 1px;
+  position: relative;
+  box-shadow: inset 0 1px 2px rgba(255,255,255,0.1);
+}
+
+.floating-health-bar.enemy .bar-inner {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(180deg, #e74c3c, #c0392b);
+  transition: width 0.1s ease-out;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+/* Ticks divisores de 100 de HP */
+.floating-health-bar .hp-tick {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1.5px;
+  background-color: rgba(0, 0, 0, 0.85);
+  pointer-events: none;
+}
+
+/* Texto de HP quantitativo flutuando no topo do monstro (empilhado) */
+.floating-health-bar.enemy .hp-text-overlay {
+  font-size: 8.5px;
+  font-weight: 700;
+  color: #00ffcc;
+  text-shadow: 1px 1px 0px #000, -1px -1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000;
+  pointer-events: none;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  margin-bottom: 1px;
+  order: 2; /* Fica logo acima da barra */
+}
+
+.floating-health-bar.enemy .entity-name {
+  font-size: 9px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 3px #000;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  order: 1; /* Fica no topo */
+}
+
+/* Números de Dano Flutuantes (Floating Damage Numbers) */
+.floating-damage-number {
+  position: absolute;
+  pointer-events: none;
+  font-family: 'Outfit', sans-serif;
+  font-size: 26px; /* Grande */
+  font-weight: 900;
+  color: #ff9f00; /* Laranja LoL */
+  text-shadow: 
+    2.5px 2.5px 0px #000,
+    -2.5px -2.5px 0px #000,
+    2.5px -2.5px 0px #000,
+    -2.5px 2.5px 0px #000,
+    0px 2.5px 0px #000,
+    0px -2.5px 0px #000,
+    2.5px 0px 0px #000,
+    -2.5px 0px 0px #000; /* Borda preta grossa 3D */
+  z-index: 100;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.1s ease;
+  letter-spacing: -0.5px;
+}
+
+.floating-damage-number.crit {
+  color: #ff3300;
+  font-size: 34px;
+}
+
+/* Cursor Virtual Customizado (LoL-Style) */
+#custom-cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  pointer-events: none;
+  z-index: 99999;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: none; /* Controlado por JS (apenas com Pointer Lock ativo) */
+  margin-top: 0px; 
+  margin-left: 0px;
+}
+
+#custom-cursor.cursor-normal {
+  background-image: url('./UI/pointers/normal.cur');
+}
+
+#custom-cursor.cursor-attack {
+  background-image: url('./UI/pointers/alt.cur');
+}
+
+#custom-cursor.cursor-link {
+  background-image: url('./UI/pointers/link.cur');
+}

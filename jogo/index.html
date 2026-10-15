@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MOBATest v0 - Etapa 2</title>
+  <link rel="stylesheet" href="./style.css">
+  <!-- Fonte Outfit para visual moderno -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="custom-cursor" class="cursor-normal"></div>
+  <canvas id="game-canvas"></canvas>
+  
+  <!-- Overlay minimalista de status de carregamento e FPS -->
+  <div id="status-hud">
+    <div class="hud-item">Status: <span id="loading-status">Carregando Caitlyn...</span></div>
+    <div class="hud-item">FPS: <span id="fps-counter">0</span></div>
+    <div class="hud-item" style="border-top: 1px solid rgba(194,157,83,0.3); margin-top: 6px; padding-top: 6px; font-weight: bold; color: #ffd88a;">Controles:</div>
+    <div class="hud-item">🖱️ Clique Direito: Mover Caitlyn / Atacar Alvo</div>
+    <div class="hud-item">⌨️ Tecla [X]: Ataque Direcional (Wild Rift)</div>
+    <div class="hud-item">⌨️ Tecla [A] + Clique Esq: Attack Move (LoL)</div>
+    <div class="hud-item">⌨️ Tecla [Y]: Alternar Trava de Câmera</div>
+    <div class="hud-item">⌨️ [Space]: Recentrar Câmera no Campeão</div>
+    <div class="hud-item">🖱️ Scroll: Zoom | MMB Drag: Arrastar Câmera</div>
+  </div>
+
+  <!-- Botão de Fullscreen Hextech -->
+  <button id="fullscreen-btn" title="Alternar Tela Cheia">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+    </svg>
+  </button>
+
+  <script type="module" src="./src/main.ts"></script>
+</body>
+</html>
